@@ -39,7 +39,7 @@ class PeerList:
         return False
 
     def add_peer(self, new_peer: ClientPeer):
-        if new_peer.username not in self:
+        if not self.has_user(new_peer.username):
             self.peerlist.append(new_peer)
         else:
             print(f"[ERROR] Peer {new_peer.username} in client list already")

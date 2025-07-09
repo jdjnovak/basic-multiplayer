@@ -131,6 +131,9 @@ if __name__ == "__main__":
     clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
     pygame.display.set_caption("Game")
+    pygame.font.init()
+
+    cart_font = pygame.font.SysFont("Cartograph CF", 24)
 
     # TODO: Figure this out
     #start_client(SOCK)
@@ -208,7 +211,12 @@ if __name__ == "__main__":
                     #move_vector = pygame.Vector2(p["pos"][0], p["pos"][1]) + pygame.Vector2(p["vel"][0], p["vel"][1]) * player_speed
                     #pygame.draw.circle(screen, p["colour"], move_vector, 50)
                     move_vector = pygame.Vector2(p.position[0], p.position[1]) + pygame.Vector2(p.velocity[0], p.velocity[1]) * player_speed
+                    text_surface = cart_font.render(p.username, False, (255,255,255))
+                    text_rect = text_surface.get_rect()
+                    text_rect.center = (p.position[0], p.position[1] - 80)
+                    screen.blit(text_surface, text_rect.topleft)
                     pygame.draw.circle(screen, p.colour, move_vector, 50)
+                    
 
         # Draw this player on top
         pygame.draw.circle(screen, player_colour, player_position, 50)
